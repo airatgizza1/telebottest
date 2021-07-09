@@ -12,7 +12,7 @@ def scan_port(ip,port):
     except:
          pass
 
-bot = telebot.TeleBot("TOKEN", parse_mode=None)
+bot = telebot.TeleBot("1766789554:AAFjxRjrbftZNpGIsSTydimO1czi-kxw8js", parse_mode=None)
 ports = [i for i in range(1,1001)]
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
@@ -20,7 +20,12 @@ def send_welcome(message):
 
 @bot.message_handler(commands=['ip'])
 def mode(message):
-    ip = (message.text.split())[1]
+    ip = '178.214.255.29'
+    try:
+        ip = (message.text.split())[1]
+    except:
+        bot.reply_to(message, 'Возникла ошибка, попробуй еще раз!')
+        pass
     for element in ports:
         t = threading.Thread(target=scan_port, kwargs={'ip':ip,'port': element})
 
